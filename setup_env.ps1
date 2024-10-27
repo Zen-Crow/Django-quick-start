@@ -1,4 +1,3 @@
-# Путь к папке .venv
 # Check if Python is existing
 if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
     Write-Output "Error. Python not found. Install Python and add it to PATH."
@@ -84,25 +83,27 @@ media/
 "@ | Set-Content -Path $gitignorePath
 }
 
-# Определяем путь к файлу и содержимое
-$envFilePath = ".env"
-$MyRawString = @("SECRET_KEY=''")  # Массив строк, которые нужно записать
 
-# Определяем кодировку UTF8 без BOM
+# Decleare path to file .env
+$envFilePath = ".env"
+$MyRawString = @("SECRET_KEY=''")  
+
+# Check if encoding is UTF8 without BOM
 $Utf8NoBomEncoding = New-Object System.Text.UTF8Encoding($false)
 
-# Проверяем, существует ли файл
+# Check if .env file was created
 if (-Not (Test-Path $envFilePath)) {
-    # Записываем строки в файл без BOM
+    # Write raw string to file without BOM
     [System.IO.File]::WriteAllLines($envFilePath, $MyRawString, $Utf8NoBomEncoding)
 }
 
 
-# Создание папки templates и пустого файла index.html
+# Create templates directory and empty index.html
 $templatesPath = "templates"
 if (-Not (Test-Path $templatesPath)) {
     New-Item -ItemType Directory -Path $templatesPath
 }
+
 
 $indexFilePath = "$templatesPath\index.html"
 if (-Not (Test-Path $indexFilePath)) {
@@ -111,14 +112,14 @@ if (-Not (Test-Path $indexFilePath)) {
 }
 
 
-# Создание директории для статических файлов
+# Create static directory
 $staticPath = "static"
 if (-Not (Test-Path $staticPath)) {
     New-Item -ItemType Directory -Path $staticPath
 }
 
 
-# Создание подпапок для статики
+# Create static/css, static/js and static/images directories
 $staticCssPath = "$staticPath\css"
 $staticJsPath = "$staticPath\js"
 $staticImagesPath = "$staticPath\images"
