@@ -1,6 +1,6 @@
 # Check if Python is existing
 if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
-    Write-Output "Error. Python not found. Install Python and add it to PATH."
+    Write-Output "Python not found. Install Python and add it to PATH."
     exit
 }
 
@@ -26,9 +26,10 @@ if (-not ($env:VIRTUAL_ENV)) {
 $requirementsPath = "requirements.txt"
 if (-Not (Test-Path $requirementsPath)) {
     @"
-django==5.1
+django==5.1.2
 psycopg2==2.9.10
 environs==11.0.0
+gunicorn==23.0.0 
 "@ | Out-File -FilePath $requirementsPath -Encoding utf8
 }
 
@@ -102,6 +103,13 @@ if (-Not (Test-Path $envFilePath)) {
 $templatesPath = "templates"
 if (-Not (Test-Path $templatesPath)) {
     New-Item -ItemType Directory -Path $templatesPath
+}
+
+
+$indexFilePath = "$templatesPath\base.html"
+if (-Not (Test-Path $baseFilePath)) {
+    # Создание пустого файла index.html
+    New-Item -ItemType File -Path $indexFilePath
 }
 
 
