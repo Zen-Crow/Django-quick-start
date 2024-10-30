@@ -101,7 +101,7 @@ if (-Not (Test-Path $envFilePath)) {
 }
 
 
-# Create templates directory and empty index.html
+# Create templates directory and empty index.html, base.html
 $templatesPath = "templates"
 if (-Not (Test-Path $templatesPath)) {
     New-Item -ItemType Directory -Path $templatesPath
