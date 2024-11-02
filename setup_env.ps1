@@ -21,6 +21,8 @@ if (-not ($env:VIRTUAL_ENV)) {
     . .\.venv\Scripts\Activate.ps1
 }
 
+# Update pip
+python.exe -m pip install --upgrade pip
 
 # Create requirements.txt with dependencies
 $requirementsPath = "requirements.txt"
@@ -103,17 +105,17 @@ if (-Not (Test-Path $envFilePath)) {
 }
 
 
-# Create templates directory and empty index.html
+# Create templates directory and empty index.html, base.html
 $templatesPath = "templates"
 if (-Not (Test-Path $templatesPath)) {
     New-Item -ItemType Directory -Path $templatesPath
 }
 
 
-$indexFilePath = "$templatesPath\base.html"
+$baseFilePath = "$templatesPath\base.html"
 if (-Not (Test-Path $baseFilePath)) {
     # Создание пустого файла index.html
-    New-Item -ItemType File -Path $indexFilePath
+    New-Item -ItemType File -Path $baseFilePath
 }
 
 
