@@ -26,8 +26,12 @@ if (-not ($env:VIRTUAL_ENV)) {
 $requirementsPath = "requirements.txt"
 if (-Not (Test-Path $requirementsPath)) {
     @"
-django==5.1.2
-psycopg2==2.9.10
+Django==5.1.2
+django-cors-headers==4.6.0
+djangorestframework==3.15.2
+djangorestframework-simplejwt==5.3.1
+psycopg2-binary==2.9.10
+
 environs==11.0.0
 gunicorn==23.0.0 
 "@ | Out-File -FilePath $requirementsPath -Encoding utf8
